@@ -51,7 +51,6 @@
 			this.DpSetDate = new System.Windows.Forms.DateTimePicker();
 			this.LblSetDate = new System.Windows.Forms.Label();
 			this.applicationContextBindingSource = new System.Windows.Forms.BindingSource(this.components);
-			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.MsMain.SuspendLayout();
 			this.GbSideMenu.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).BeginInit();
@@ -72,7 +71,6 @@
 			this.MiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MiNew,
             this.MiConnect,
-            this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem,
             this.toolStripSeparator,
             this.MiExit});
 			this.MiFile.Name = "MiFile";
@@ -82,7 +80,7 @@
 			// MiNew
 			// 
 			this.MiNew.Name = "MiNew";
-			this.MiNew.Size = new System.Drawing.Size(241, 22);
+			this.MiNew.Size = new System.Drawing.Size(180, 22);
 			this.MiNew.Text = "Создать новую БД";
 			this.MiNew.Click += new System.EventHandler(this.MiNew_Click);
 			// 
@@ -90,18 +88,18 @@
 			// 
 			this.MiConnect.Name = "MiConnect";
 			this.MiConnect.Size = new System.Drawing.Size(180, 22);
-			this.MiConnect.Text = "Загрузить БД";
+			this.MiConnect.Text = "Подключить БД";
 			this.MiConnect.Click += new System.EventHandler(this.MiConnect_Click);
 			// 
 			// toolStripSeparator
 			// 
 			this.toolStripSeparator.Name = "toolStripSeparator";
-			this.toolStripSeparator.Size = new System.Drawing.Size(238, 6);
+			this.toolStripSeparator.Size = new System.Drawing.Size(177, 6);
 			// 
 			// MiExit
 			// 
 			this.MiExit.Name = "MiExit";
-			this.MiExit.Size = new System.Drawing.Size(241, 22);
+			this.MiExit.Size = new System.Drawing.Size(180, 22);
 			this.MiExit.Text = "Выход";
 			this.MiExit.Click += new System.EventHandler(this.MiExit_Click);
 			// 
@@ -242,12 +240,6 @@
 			// 
 			this.applicationContextBindingSource.DataSource = typeof(TestProject.Models.MainModel.ApplicationContext);
 			// 
-			// копироватьДанныеИзБДВНовыйФайлToolStripMenuItem
-			// 
-			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem.Name = "копироватьДанныеИзБДВНовыйФайлToolStripMenuItem";
-			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem.Text = "Копировать БД";
-			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -296,7 +288,6 @@
 		private System.Windows.Forms.DateTimePicker DpSetDate;
 		private System.Windows.Forms.Label LblSetDate;
 		private System.Windows.Forms.BindingSource applicationContextBindingSource;
-		private System.Windows.Forms.ToolStripMenuItem копироватьДанныеИзБДВНовыйФайлToolStripMenuItem;
 	}
 }
 
