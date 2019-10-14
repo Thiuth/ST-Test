@@ -28,11 +28,12 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.MsMain = new System.Windows.Forms.MenuStrip();
 			this.MiFile = new System.Windows.Forms.ToolStripMenuItem();
 			this.MiNew = new System.Windows.Forms.ToolStripMenuItem();
 			this.MiConnect = new System.Windows.Forms.ToolStripMenuItem();
-			this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+			this.toolStripSeparator = new System.Windows.Forms.ToolStripSeparator();
 			this.MiExit = new System.Windows.Forms.ToolStripMenuItem();
 			this.GbSideMenu = new System.Windows.Forms.GroupBox();
 			this.BtnDeleteRecord = new System.Windows.Forms.Button();
@@ -49,8 +50,11 @@
 			this.BtnGetCurrentDate = new System.Windows.Forms.Button();
 			this.DpSetDate = new System.Windows.Forms.DateTimePicker();
 			this.LblSetDate = new System.Windows.Forms.Label();
+			this.applicationContextBindingSource = new System.Windows.Forms.BindingSource(this.components);
+			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.MsMain.SuspendLayout();
 			this.GbSideMenu.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// MsMain
@@ -68,7 +72,8 @@
 			this.MiFile.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.MiNew,
             this.MiConnect,
-            this.toolStripSeparator1,
+            this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem,
+            this.toolStripSeparator,
             this.MiExit});
 			this.MiFile.Name = "MiFile";
 			this.MiFile.Size = new System.Drawing.Size(48, 20);
@@ -77,26 +82,26 @@
 			// MiNew
 			// 
 			this.MiNew.Name = "MiNew";
-			this.MiNew.Size = new System.Drawing.Size(174, 22);
+			this.MiNew.Size = new System.Drawing.Size(241, 22);
 			this.MiNew.Text = "Создать новую БД";
 			this.MiNew.Click += new System.EventHandler(this.MiNew_Click);
 			// 
 			// MiConnect
 			// 
 			this.MiConnect.Name = "MiConnect";
-			this.MiConnect.Size = new System.Drawing.Size(174, 22);
-			this.MiConnect.Text = "Подключить БД";
+			this.MiConnect.Size = new System.Drawing.Size(180, 22);
+			this.MiConnect.Text = "Загрузить БД";
 			this.MiConnect.Click += new System.EventHandler(this.MiConnect_Click);
 			// 
-			// toolStripSeparator1
+			// toolStripSeparator
 			// 
-			this.toolStripSeparator1.Name = "toolStripSeparator1";
-			this.toolStripSeparator1.Size = new System.Drawing.Size(171, 6);
+			this.toolStripSeparator.Name = "toolStripSeparator";
+			this.toolStripSeparator.Size = new System.Drawing.Size(238, 6);
 			// 
 			// MiExit
 			// 
 			this.MiExit.Name = "MiExit";
-			this.MiExit.Size = new System.Drawing.Size(174, 22);
+			this.MiExit.Size = new System.Drawing.Size(241, 22);
 			this.MiExit.Text = "Выход";
 			this.MiExit.Click += new System.EventHandler(this.MiExit_Click);
 			// 
@@ -233,6 +238,16 @@
 			this.LblSetDate.TabIndex = 5;
 			this.LblSetDate.Text = "Дата для расчета з/п";
 			// 
+			// applicationContextBindingSource
+			// 
+			this.applicationContextBindingSource.DataSource = typeof(TestProject.Models.MainModel.ApplicationContext);
+			// 
+			// копироватьДанныеИзБДВНовыйФайлToolStripMenuItem
+			// 
+			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem.Name = "копироватьДанныеИзБДВНовыйФайлToolStripMenuItem";
+			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+			this.копироватьДанныеИзБДВНовыйФайлToolStripMenuItem.Text = "Копировать БД";
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -251,6 +266,7 @@
 			this.MsMain.ResumeLayout(false);
 			this.MsMain.PerformLayout();
 			this.GbSideMenu.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.applicationContextBindingSource)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -262,7 +278,7 @@
 		private System.Windows.Forms.ToolStripMenuItem MiFile;
 		private System.Windows.Forms.ToolStripMenuItem MiNew;
 		private System.Windows.Forms.ToolStripMenuItem MiConnect;
-		private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+		private System.Windows.Forms.ToolStripSeparator toolStripSeparator;
 		private System.Windows.Forms.ToolStripMenuItem MiExit;
 		private System.Windows.Forms.GroupBox GbSideMenu;
 		private System.Windows.Forms.Button BtnDeleteRecord;
@@ -279,6 +295,8 @@
 		private System.Windows.Forms.Button BtnGetCurrentDate;
 		private System.Windows.Forms.DateTimePicker DpSetDate;
 		private System.Windows.Forms.Label LblSetDate;
+		private System.Windows.Forms.BindingSource applicationContextBindingSource;
+		private System.Windows.Forms.ToolStripMenuItem копироватьДанныеИзБДВНовыйФайлToolStripMenuItem;
 	}
 }
 

@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TestProject.Models;
-using TestProject.Presenters;
+using TestProject.Presentation;
 using TestProject.Service;
-using TestProject.Views;
+using TestProject.UI;
+using System.Linq;
 
 namespace TestProject
 {
-	public partial class FormAddRecord : Form, IAddRecordView
+	public partial class FormAddRecord : Form, IVAddRecord
 	{
-		private AddRecordPresenter Presenter { get; set; }
-		public FormAddRecord(IModel model)
+		private PrAddRecord Presenter { get; set; }
+		private IErrorOutput ErrHandler { get; set; }
+		public FormAddRecord(IModel model, IPrMain mainPresenter)
 		{
 			InitializeComponent();
-			Presenter = new AddRecordPresenter(this, Application.OpenForms["FormMain"] as FormMain, model);
+			Presenter = new PrAddRecord(this, Application.OpenForms["FormMain"] as FormMain, model, mainPresenter);
+			ErrHandler = new ErrorOutput();
 		}
 
-		//	Перезагружает список начальников
+		/// <summary>
+		/// Перезагружает список начальников
+		/// </summary>
 		public void ReloadHeadList(List<ComboBoxItem> items)
 		{
 			CbHead.Items.Clear();
@@ -28,11 +33,31 @@ namespace TestProject
 			}
 		}
 
-		//	Обнуляет поля ввода
+		/// <summary>
+		/// Обнуляет поля ввода
+		/// </summary>
 		public void ClearControls()
 		{
 			TbName.Text = "";
 			TbBaseSalary.Text = "";
+		}
+
+		/// <summary>
+		/// Проверяет поля на форме на предмет корректности введенных данных
+		/// </summary>
+		private bool FieldsAreValid()
+		{
+			if (
+				TbName.Text == "" ||
+				TbBaseSalary.Text == "" ||
+				TbBaseSalary.Text.Any(c => char.IsLetter(c)))
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 
 		//	Обработчики UI
@@ -43,13 +68,20 @@ namespace TestProject
 
 		private void BtnAddRecord_Click(object sender, EventArgs e)
 		{
-			Presenter.Name = TbName.Text;
-			Presenter.Group = (PersonGroup)CbGroup.SelectedIndex;
-			Presenter.HeadId = ((ComboBoxItem)CbHead.SelectedItem).Id;
-			Presenter.RecDate = DpRecDate.Value.Date;
-			Presenter.BaseSalary = Convert.ToUInt32(TbBaseSalary.Text);
-			Presenter.AddRecord();
-			Presenter.GenerateComboBoxItems();
+			if (FieldsAreValid())
+			{
+				Presenter.Name = TbName.Text;
+				Presenter.Group = (PersonGroup)CbGroup.SelectedIndex;
+				Presenter.HeadId = ((ComboBoxItem)CbHead.SelectedItem).Id;
+				Presenter.RecDate = DpRecDate.Value.Date;
+				Presenter.BaseSalary = Convert.ToUInt32(TbBaseSalary.Text);
+				Presenter.AddRecord();
+				Presenter.GenerateComboBoxItems();
+			}
+			else
+			{
+				ErrHandler.ShowError(ErrorType.InvalidADFields);
+			}
 		}
 
 		private void FormAddRecord_Load(object sender, EventArgs e)

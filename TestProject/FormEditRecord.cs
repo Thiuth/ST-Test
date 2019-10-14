@@ -2,22 +2,27 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using TestProject.Models;
-using TestProject.Presenters;
+using TestProject.Presentation;
 using TestProject.Service;
-using TestProject.Views;
+using TestProject.UI;
+using System.Linq;
 
 namespace TestProject
 {
-	public partial class FormEditRecord : Form, IEditRecordView
+	public partial class FormEditRecord : Form, IVEditRecord
 	{
-		private EditRecordPresenter Presenter { get; set; }
-		public FormEditRecord(IModel model)
+		private PrEditRecord Presenter { get; set; }
+		private IErrorOutput ErrHandler { get; set; }
+		public FormEditRecord(IModel model, IPrMain mainPresenter)
 		{
 			InitializeComponent();
-			Presenter = new EditRecordPresenter(this, Application.OpenForms["FormMain"] as FormMain, model);
+			Presenter = new PrEditRecord(this, Application.OpenForms["FormMain"] as FormMain, model, mainPresenter);
+			ErrHandler = new ErrorOutput();
 		}
 
-		//	Обновляет список начальников
+		/// <summary>
+		/// Обновляет список начальников
+		/// </summary>
 		public void ReloadHeadList(List<ComboBoxItem> items)
 		{
 			CbHead.Items.Clear();
@@ -28,14 +33,35 @@ namespace TestProject
 			}
 		}
 
-		//	Заполняет форму данными из модели
-		public void FillControls(string name, int group, int head, DateTime date, uint baseSalary)
+		/// <summary>
+		/// Заполняет форму данными из модели
+		/// </summary>
+
+		public void FillControls(string name, int group, int head, DateTime date, long baseSalary)
 		{
 			TbName.Text = name;
 			CbGroup.SelectedIndex = group;
 			CbHead.SelectedIndex = 0;
 			DpRecDate.Value = date;
 			TbBaseSalary.Text = baseSalary.ToString();
+		}
+
+		/// <summary>
+		/// Проверяет поля на форме на предмет корректности введенных данных
+		/// </summary>
+		private bool FieldsAreValid()
+		{
+			if (
+				TbName.Text == "" ||
+				TbBaseSalary.Text == "" ||
+				TbBaseSalary.Text.Any(c => char.IsLetter(c)))
+			{
+				return false;
+			}
+			else
+			{
+				return true;
+			}
 		}
 
 		//	Обработчики UI
@@ -48,13 +74,20 @@ namespace TestProject
 
 		private void BtnAddRecord_Click(object sender, EventArgs e)
 		{
-			Presenter.ApplyChanges(
-				TbName.Text,
-				CbGroup.SelectedIndex,
-				((ComboBoxItem)CbHead.SelectedItem).Id,
-				DpRecDate.Value.Date,
-				Convert.ToUInt32(TbBaseSalary.Text));
-			Close();
+			if (FieldsAreValid())
+			{
+				Presenter.ApplyChanges(
+					TbName.Text,
+					CbGroup.SelectedIndex,
+					((ComboBoxItem)CbHead.SelectedItem).Id,
+					DpRecDate.Value.Date,
+					Convert.ToUInt32(TbBaseSalary.Text));
+				Close();
+			}
+			else
+			{
+				ErrHandler.ShowError(ErrorType.InvalidEDFields);
+			}
 		}
 	}
 }

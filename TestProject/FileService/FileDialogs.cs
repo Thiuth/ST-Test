@@ -1,13 +1,17 @@
 ﻿using System.IO;
 using System.Windows.Forms;
 
-namespace TestProject.FD
+namespace TestProject.FileService
 {
-	//	Вспомогательный класс, реализующий методы получения имен файлов путем вызова соответствующих диалоговых окон.
+	/// <summary>
+	/// Содержит функционал, позволяющий получать имя файла с помощью диалогов открытия и сохранения
+	/// </summary>
 	public class FileDialogs : IFileDialogs
 	{
 
-		//	Вызывает диалоговое окно открытия
+		/// <summary>
+		/// Выводит диалоговое окно открытия файла
+		/// </summary>
 		public string OFD()
 		{
 			using (var dlg = new OpenFileDialog())
@@ -26,7 +30,9 @@ namespace TestProject.FD
 			}
 		}
 
-		//	Вызывает диалоговое окно сохранения
+		/// <summary>
+		/// Выводит диалоговое окно сохранения файла
+		/// </summary>
 		public string SFD()
 		{
 			using (var dlg = new SaveFileDialog())

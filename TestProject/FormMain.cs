@@ -1,22 +1,28 @@
 ﻿using System;
 using System.Windows.Forms;
 using TestProject.Models;
-using TestProject.Presenters;
-using TestProject.Views;
+using TestProject.Presentation;
+using TestProject.UI;
+using TestProject.FileService;
+using System.IO;
 
 namespace TestProject
 {
-	public partial class FormMain : Form, IMainView
+	public partial class FormMain : Form, IVMain
 	{
-		private MainPresenter Presenter { get; set; }
+		private IPrMain Presenter { get; set; }
+		private IFileDialogs FileDlgs { get; set; }
 		public FormMain()
 		{
 			InitializeComponent();
 			DisableSideMenu();
-			Presenter = new MainPresenter(this, new Model());
+			Presenter = new PrMain(this, new MainModel());
+			FileDlgs = new FileDialogs();
 		}
 
-		//	Активирует кнопки сбоку окна
+		/// <summary>
+		/// Активирует кнопки сбоку окна
+		/// </summary>
 		public void EnableSideMenu()
 		{
 			BtnAddRecord.Enabled = true;
@@ -24,7 +30,9 @@ namespace TestProject
 			BtnDeleteRecord.Enabled = true;
 		}
 
-		//	Деактивирует кнопки сбоку окна
+		/// <summary>
+		/// Деактивирует кнопки сбоку окна
+		/// </summary>
 		public void DisableSideMenu()
 		{
 			BtnAddRecord.Enabled = false;
@@ -32,8 +40,10 @@ namespace TestProject
 			BtnDeleteRecord.Enabled = false;
 		}
 
-		//	Заполняет таблицу в главном окне
-		public void FillListView(string[,] table)
+		/// <summary>
+		/// Заполняет таблицу в главном окне
+		/// </summary>
+		public void UpdateListView(string[,] table)
 		{
 			LvMain.Items.Clear();
 			ListViewItem item;
@@ -50,18 +60,18 @@ namespace TestProject
 			LvMain.AutoResizeColumns(ColumnHeaderAutoResizeStyle.HeaderSize);
 		}
 
-		//	Получает ID выделенной записи
+		/// <summary>
+		/// Получает ID выделенной записи
+		/// </summary>
 		public int GetSelectedId()
 		{
 			var selected = LvMain.SelectedItems[0];
 			return Convert.ToInt32(selected.SubItems[0].Text);
 		}
 
-		//	Обрабатывает ошибку. возникающую при неправильно указанной дате
-		public void HandleDateError()
+		public void SetDatePickerValue(DateTime date)
 		{
-			MessageBox.Show("Выбранная дата должна быть позже всех дат поступления сотрудников на работу", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-			DpSetDate.Value = DateTime.Now;
+			DpSetDate.Value = date;
 		}
 
 		//	Обработчики UI
@@ -72,12 +82,16 @@ namespace TestProject
 
 		private void MiNew_Click(object sender, EventArgs e)
 		{
-			Presenter.DBNew();
+			var fileName = FileDlgs.SFD();
+			if (fileName != null)
+				Presenter.DBNew(fileName);
 		}
 
 		private void MiConnect_Click(object sender, EventArgs e)
 		{
-			Presenter.DBConnect();
+			var fileName = FileDlgs.OFD();
+			if (fileName != null)
+				Presenter.Connect(fileName);
 		}
 
 		private void BtnAddRecord_Click(object sender, EventArgs e)
