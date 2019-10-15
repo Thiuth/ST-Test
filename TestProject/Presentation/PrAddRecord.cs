@@ -6,8 +6,7 @@ using TestProject.Service;
 using TestProject.UI;
 
 namespace TestProject.Presentation
-{
-	//	
+{	
 	/// <summary>
 	/// Представитель, обеспечивающий связь модели и окна добавления сотрудника
 	/// </summary>

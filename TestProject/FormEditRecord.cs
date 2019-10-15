@@ -67,8 +67,8 @@ namespace TestProject
 		//	Обработчики UI
 		private void FormEditRecord_Load(object sender, EventArgs e)
 		{
-			Presenter.GenerateComboBoxItems();
 			Presenter.LoadValues();
+			Presenter.GenerateComboBoxItems();
 			CbHead.SelectedIndex = 0;
 		}
 

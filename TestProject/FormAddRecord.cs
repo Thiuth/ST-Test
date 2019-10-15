@@ -88,6 +88,7 @@ namespace TestProject
 		{
 			Presenter.GenerateComboBoxItems();
 			CbHead.SelectedIndex = 0;
+			CbGroup.SelectedIndex = 0;
 		}
 	}
 }

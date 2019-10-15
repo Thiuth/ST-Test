@@ -9,7 +9,7 @@ namespace TestProject.Presentation
 	/// </summary>
 	public abstract class PrRecordDialog<TView> : PrBase<TView>
 	{
-		public IVMain MainView { get; set; }
+		protected IVMain MainView { get; set; }
 		public string Name { get; set; }
 		public PersonGroup Group { get; set; }
 		public int HeadId { get; set; }

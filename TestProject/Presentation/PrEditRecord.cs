@@ -47,7 +47,7 @@ namespace TestProject.Presentation
 			var items = new List<ComboBoxItem>();
 			foreach (var person in records)
 			{
-				if (person.Group != (int)PersonGroup.Employee)
+				if (person.Group != (int)PersonGroup.Employee && person.Id != Id)
 				{
 					items.Add(new ComboBoxItem(person.Id, person.Name));
 				}
