@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Data;
-using TestProject.Service;
 using System.Collections.Generic;
-using System.Data.Entity;
+using TestProject.Service;
 
 namespace TestProject.Models
 {

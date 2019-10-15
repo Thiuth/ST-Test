@@ -48,9 +48,9 @@ namespace TestProject
 		private bool FieldsAreValid()
 		{
 			if (
-				TbName.Text == "" ||
-				TbBaseSalary.Text == "" ||
-				TbBaseSalary.Text.Any(c => char.IsLetter(c)))
+				TbName.Text == ""
+				|| TbBaseSalary.Text == ""
+				|| !TbBaseSalary.Text.All(c => char.IsDigit(c)))
 			{
 				return false;
 			}

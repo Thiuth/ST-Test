@@ -4,7 +4,6 @@ using System.Data.Entity;
 using System.Data.SQLite;
 using System.Linq;
 using TestProject.Service;
-using System.Data.EntityClient;
 
 namespace TestProject.Models
 {

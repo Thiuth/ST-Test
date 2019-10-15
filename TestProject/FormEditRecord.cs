@@ -54,7 +54,7 @@ namespace TestProject
 			if (
 				TbName.Text == "" ||
 				TbBaseSalary.Text == "" ||
-				TbBaseSalary.Text.Any(c => char.IsLetter(c)))
+				!TbBaseSalary.Text.All(c => char.IsDigit(c)))
 			{
 				return false;
 			}
